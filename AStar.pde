@@ -1,4 +1,4 @@
- //<>//
+
 class Algorithm {
   long calc_ms = 0;
   long gen_ms = 0;
@@ -43,7 +43,7 @@ class Algorithm {
   }
 
   void generatePath() {
-    tmp = millis();
+    tmp = System.nanoTime();
     path.clear();
     Hexagon temp = current;
     path.add(temp);
@@ -57,7 +57,7 @@ class Algorithm {
     if (log) {
         logfile.println("Fuel left " + (temp.fuel_val) + " Path length from start " + (temp.g));
       }
-    gen_ms += millis() - tmp;
+    gen_ms += System.nanoTime() - tmp;
     //println("path length: " + (path.size()-1));
   }
   
@@ -75,7 +75,7 @@ class Algorithm {
   
   void calculate() {
     //while (true) { //remove delay in draw function and uncomment to skip animation and show the solution in one step
-    tmp = millis();
+    tmp = System.nanoTime();
     if (openSet.size() > 0) {
       int winner = 0; // Выбираем первый узел, как узел с минимальным путем или стоимостью
       for (int i = 0; i < openSet.size(); i++) { // Проверяем весь список не проверенных узлов
@@ -89,7 +89,7 @@ class Algorithm {
         logfile.println("Result: Out of fuel");
         log = true;
         noLoop();
-        calc_ms += millis() - tmp;
+        calc_ms += System.nanoTime() - tmp;
         logfile.println("Calculating path time:");
         logfile.println(calc_ms);
         logfile.println("Generating path time:");
@@ -104,6 +104,7 @@ class Algorithm {
         log = true;
         logfile.println("Result: target found");
         logfile.println("path length: " + (path.size()-1));
+        calc_ms += System.nanoTime() - tmp;
         noLoop();
         logfile.println("Calculating path time:");
         logfile.println(calc_ms);
@@ -162,12 +163,12 @@ class Algorithm {
           }
         }
       }
-      calc_ms += millis() - tmp;
+      calc_ms += System.nanoTime() - tmp;
     } else { //no solution
       logfile.println("Result: no solution");
       log = true;
       noLoop();
-      calc_ms += millis() - tmp;
+      calc_ms += System.nanoTime() - tmp;
       logfile.println("Calculating path time:");
       logfile.println(calc_ms);
       logfile.println("Generating path time:");

@@ -2,6 +2,7 @@ import processing.video.*;
 import java.util.*;
 import org.ejml.*;
 import java.io.*;
+//import java.system.*;
 import boofcv.struct.calib.*;
 import boofcv.io.calibration.CalibrationIO;
 import boofcv.alg.geo.PerspectiveOps;
@@ -40,7 +41,6 @@ void setup() {
   frameRate(30);
   surface.setSize(1920, 1080);
   fullScreen(1);
-
   initArena();
   gridOutlines = createGraphics(width, height);
   gridFill = createGraphics(width, height);
