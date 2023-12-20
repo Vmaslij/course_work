@@ -20,13 +20,13 @@ PGraphics gridFill;
 PGraphics arenaMask;
 
 //Settings variables
-int impassableRate = 5; //set between 0 and 10. Higher numbers increase the rate of impassable hexes 
-int fuelRate = 3; //set between 0 and 10.
-int maxHexFuel = 15; // Max possible fuel on grid cell
-int minHexFuel = 5; // Min possible fuel on grid cell
+int impassableRate = 10; //set between 0 and 10. Higher numbers increase the rate of impassable hexes 
+int fuelRate = 1; //set between 0 and 10.
+int maxHexFuel = 15; // Max possible fuel on grid cell && robot could have
+int minHexFuel = 3; // Min possible fuel on grid cell
 int initFuel = 15; // Initial fuel robot has
 int hexSize = 25; //
-int stepDelay = 1; //time delay for step, seems that it should be bigger
+int stepDelay = 10; //time delay for step, seems that it should be bigger
 
 int click_count; // Count number of times mouse clicked (set to 0 when target hex was chosen)
 boolean draw_path; // Draw and calc path from start to target if true

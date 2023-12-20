@@ -17,6 +17,7 @@ class Hexagon {
   List<Hexagon> neighbors = new ArrayList<Hexagon>();
   Hexagon previous = null;
   int fuel_val = 0;
+  int init_fuel_val = 0;
   int state; // 0 - barrier, 1 - hex cell, 2 - fuel cell 
 
   //
@@ -46,6 +47,7 @@ class Hexagon {
    g = 0;
    heuristic = 0;
    fuel_val = 0;
+   //init_fuel_val = 0;
    neighbors.clear();
    addNeighbors();
    previous = null;
@@ -131,16 +133,19 @@ class Hexagon {
   void passable() {
     state = 1;
     fuel_val = 0;
+    init_fuel_val = 0;
   }
   // Fuel cell
   void fuel() {
     state = 2;
-    fuel_val = int(random(minHexFuel, maxHexFuel));
+    fuel_val = ceil(random(minHexFuel, maxHexFuel));
+    init_fuel_val = fuel_val;
   }
   // Barrier cell
   void impassable() {
     state = 0;
     fuel_val = 0;
+    init_fuel_val = 0;
   }
 
   void blinkHex(PGraphics buffer) {

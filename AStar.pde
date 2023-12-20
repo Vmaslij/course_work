@@ -4,6 +4,7 @@ class Algorithm {
   long gen_ms = 0;
   long tmp;
   int rfuel;
+  boolean log = false;
   Hexagon start;
   Hexagon target;
   Hexagon current;
@@ -28,6 +29,7 @@ class Algorithm {
   void setTargets( Hexagon start_, Hexagon target_) {
     start = start_;
     start.fuel_val = initFuel;
+    start.init_fuel_val = initFuel;
     target = target_;
     openSet.clear();
     closedSet.clear();
@@ -47,11 +49,18 @@ class Algorithm {
     path.add(temp);
     while (temp.previous != null) {
       path.add(temp.previous);
+      if (log) {
+        logfile.println("Fuel left " + (temp.fuel_val) + " Path length from start " + (temp.g));
+      }
       temp = temp.previous;
     }
+    if (log) {
+        logfile.println("Fuel left " + (temp.fuel_val) + " Path length from start " + (temp.g));
+      }
     gen_ms += millis() - tmp;
     //println("path length: " + (path.size()-1));
   }
+  
   void reset(){
     for (Map.Entry<PVector, Hexagon> me : hexGrid.allHexes.entrySet()) {
       Hexagon h = me.getValue();
@@ -60,6 +69,7 @@ class Algorithm {
     rfuel = initFuel;
     calc_ms = 0;
     gen_ms = 0;
+    log = false;
     loop();
   }
   
@@ -74,10 +84,25 @@ class Algorithm {
         }
       }
       current = openSet.get(winner); // Переходим в лучший узел и теперь будем искать куда можно отсюда пойти
+      if (current.f >= 3E36) { // Случай, когда все вершины в которые можно перейти недостижимы из-за недостатка топлива
+        //openSet.clear();
+        logfile.println("Result: Out of fuel");
+        log = true;
+        noLoop();
+        calc_ms += millis() - tmp;
+        logfile.println("Calculating path time:");
+        logfile.println(calc_ms);
+        logfile.println("Generating path time:");
+        logfile.println(gen_ms);
+        logfile.println("Sum time:");
+        logfile.println(gen_ms + calc_ms);
+        return;
+      }
 
       // Did I finish?
       if (current == target) { // В случае если дошли до цели
-        logfile.println("target found");
+        log = true;
+        logfile.println("Result: target found");
         logfile.println("path length: " + (path.size()-1));
         noLoop();
         logfile.println("Calculating path time:");
@@ -89,9 +114,6 @@ class Algorithm {
         //generatePath();
         return;
       }
-
-      // Best option moves from openSet to closedSet
-      //openSet = removeFromArray(openSet, current);
 
       openSet.remove(current); // Убираем текущий узел из списка непросмотренных
       closedSet.add(current); // Добавляем текущий узел в список просмотренных узлов
@@ -110,39 +132,40 @@ class Algorithm {
           boolean newPath = false;
           if (openSet.contains(neighbor)) {
             if (tempG < neighbor.g) { // Путь до соседа короче, чем тот что у него был (стало быть нашли путь лучше до этой точки)
-              neighbor.fuel_val += current.fuel_val - tempG;
-              println(neighbor.fuel_val);
-              if (neighbor.fuel_val < 0) {
-              	neighbor.g = 3E36;
-              	//neighbor.g = (~neighbor.g) - heuristic(neighbor, target) - 10; //!
-              } else {
-              	neighbor.g = tempG; // Запомнили в переменную соседа этот путь
-              }
               newPath = true;
             }
           } else { // Добавляем соседа в список доступных вершин
-          	neighbor.fuel_val += current.fuel_val - tempG;
-            println(neighbor.fuel_val);
-            if (neighbor.fuel_val < 0) {
-		      	neighbor.g = 3E36;
-		      	//neighbor.g = (~neighbor.g) - heuristic(neighbor, target) - 10; //!
-		      } else {
-		      	neighbor.g = tempG; // Запомнили в переменную соседа этот путь
-		      }
             newPath = true;
             openSet.add(neighbor); // Добавляем соседа в список доступных вершин
           }
           //Yes, it's a better path
           if (newPath) {
+            //println("\r\nCell state: " + neighbor.state);
+            //println("Init fuel: " + neighbor.init_fuel_val);
+            neighbor.fuel_val = current.fuel_val - ceil(heuristic(neighbor, current)) + neighbor.init_fuel_val;
+            //println("Result fuel: " + neighbor.fuel_val);
+            if (neighbor.fuel_val > maxHexFuel) { // Ограничение сверху на максимальное топливу у робота (типо бак больше не может вместить)
+              neighbor.fuel_val = maxHexFuel;
+            }
+            
+            if (current.fuel_val <= 0) {
+              neighbor.fuel_val = neighbor.init_fuel_val;
+              neighbor.g = 3E36;           
+            } else {
+              neighbor.g = tempG; // Запомнили в переменную соседа этот путь
+            }
+            //println("Result path length: " + neighbor.g);
             neighbor.heuristic = heuristic(neighbor, target); // Запоминаем на будущее значение эвристики от этого соседа до цели
-            neighbor.f = neighbor.g + neighbor.heuristic; // Запоминаем общую стоимость пути 
+            neighbor.f = neighbor.g + neighbor.heuristic; // Запоминаем общую стоимость пути
+            //println("Result estimated path length: " + neighbor.f);
             neighbor.previous = current; // Запоминаем, откуда попали в этот узел
           }
         }
       }
       calc_ms += millis() - tmp;
     } else { //no solution
-      println("no solution");
+      logfile.println("Result: no solution");
+      log = true;
       noLoop();
       calc_ms += millis() - tmp;
       logfile.println("Calculating path time:");
