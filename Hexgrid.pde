@@ -1,12 +1,4 @@
-/* //<>// //<>// //<>//
- Hex grid calculations are based on the excellent interactive Hexagonal Grids guide
- from Amit Patel at Red Blob Games (https://www.redblobgames.com/grids/hexagons)
- 
- There is also an implementation guide, which I did not see until I had done a lot of things the ugly way.
- If there is time, I will refactor this class into something resembling the more elegant version at:
- https://www.redblobgames.com/grids/hexagons/implementation.html
- */
-class Hexgrid {
+class Hexgrid { //<>//
   HashMap<PVector, Hexagon> allHexes;
   PVector[] neighbors;
   
@@ -17,8 +9,6 @@ class Hexgrid {
   int rMax = 230;
   int hexSize;
   Hexagon r1Hex;
-
-
 
 
   Hexgrid(int hexSize_, PGraphics mask) {
@@ -120,36 +110,10 @@ class Hexgrid {
   }
 
 
-  //void drawHexFill(PGraphics buffer, Hexagon h, color c) {
-  //  buffer.beginDraw();
-  //  h.
-  //}
-  //void updateRoverLocation(int roverID, FiducialFound f) {
-  //}
-  //PVector getHexKeyfromHex(Hexagon h){
-
-  //}
-
   Hexagon getHex(PVector hexKey) {   //hashmap lookup to return hexagon from PVector key
     Hexagon h = allHexes.get(hexKey);
     return(h);
   }
-  PVector getXY(PVector hexKey) {   //hashmap lookup to return hexagon from PVector key
-    Hexagon h = allHexes.get(hexKey);
-    PVector hxy = h.getXY();
-    return(hxy);
-  }
-
-  PVector getXY(Hexagon h) {
-    PVector hxy = h.getXY();
-    return (hxy);
-  }
-
-  //Hexagon getHex(Point2D_F64 hexKey_) {   //hashmap lookup to return hexagon from PVector key
-  //  PVector hexKey = new PVector((float)hexKey_.x, (float)hexKey_.y);
-  //  Hexagon h = allHexes.get(hexKey);
-  //  return(h);
-  //}
 
   Hexagon pixelToHex(int xPixel, int yPixel) {   //find which hex a specified pixel lies in
     PVector hexID = new PVector();
@@ -159,24 +123,6 @@ class Hexgrid {
     hexID = cubeRound(hexID);
     Hexagon h = allHexes.get(hexID);
     return h;
-  }
-  Hexagon pixelToHex(PVector location) {   //find which hex a specified pixel lies in
-    PVector hexID = new PVector();
-    hexID.x = (2./3*location.x)/hexSize;
-    hexID.z = (-1./3 * location.x + sqrt(3)/3 * location.y)/hexSize;
-    hexID.y = (-hexID.x - hexID.z);
-    hexID = cubeRound(hexID);
-    Hexagon h = allHexes.get(hexID);
-    return h;
-  }
-
-  PVector pixelToKey(PVector location) {
-    PVector hexID = new PVector();
-    hexID.x = (2./3*location.x)/hexSize;
-    hexID.z = (-1./3 * location.x + sqrt(3)/3 * location.y)/hexSize;
-    hexID.y = (-hexID.x - hexID.z);
-    hexID = cubeRound(hexID);
-    return hexID;
   }
 
   Hexagon[] getNeighbors(Hexagon h) {   //return an array of the 6 neighbor cells. If the neighbor is out of bounds, its array location will be null
@@ -194,16 +140,6 @@ class Hexgrid {
     }
     return(neighborList);
   }
-  PVector[] getNeighborIDs(PVector hexID) {
-    PVector[] neighborList = new PVector[6];
-    PVector neighborID = new PVector();
-    for (int i = 0; i < 6; i++) {
-      neighborID.set(hexID);
-      neighborID = neighborID.add(neighbors[i]);
-      neighborList[i] = neighborID;
-    }
-    return(neighborList);
-  }
 
   boolean checkHex(PVector hexKey_) {
     return (allHexes.containsKey(hexKey_));
@@ -212,29 +148,6 @@ class Hexgrid {
   int passable(PVector hexKey_){
    Hexagon h = getHex(hexKey_);
    return h.state;
-  }
-
-  Hexagon getNeighbor(Hexagon h, int neighbor) {
-    PVector hexID = h.getKey();
-    PVector neighborID = hexID.copy();
-    neighborID = neighborID.add(neighbors[neighbor]);
-    Hexagon neighborHex = getHex(neighborID);
-    return h;
-  }
-
-  Hexagon[] getNeighbors(PVector hexID) {   //overloaded method to accept a pvector key instead of a Hexagon object
-    Hexagon[] neighborList = new Hexagon[6];
-    for (int i = 0; i < 6; i++) {
-      PVector neighborID = hexID.copy();
-      neighborID = neighborID.add(neighbors[i]);
-      Hexagon neighbor = getHex(neighborID);
-      if (neighbor == null) {
-        neighborList[i] = null;
-      } else {
-        neighborList[i] = neighbor;
-      }
-    }
-    return(neighborList);
   }
 
   PVector hexToPixel(int q, int r) {
@@ -263,6 +176,7 @@ class Hexgrid {
     PVector rHexID = new PVector(rx, ry, rz);
     return(rHexID);
   }
+  
   float normalizeRadians(float theta) {
     while (theta < 0 || theta > TWO_PI) {
       if (theta < 0) {
@@ -274,6 +188,7 @@ class Hexgrid {
     }
     return theta;
   }
+  
   Float cubeDistance(Hexagon a, Hexagon b) {
     PVector vec = cubeSubtract(a,b);
     return (abs(vec.x) + abs(vec.y) + abs(vec.z))/2;

@@ -61,7 +61,6 @@ class Algorithm {
         logfile.println("Fuel left " + (temp.fuel_val) + " Path length from start " + (temp.g));
       }
     gen_ms += System.nanoTime() - tmp;
-    //println("path length: " + (path.size()-1));
   }
   
   void reset(){
@@ -77,7 +76,6 @@ class Algorithm {
   }
   
   void calculate() {
-    //while (true) { //remove delay in draw function and uncomment to skip animation and show the solution in one step
     tmp = System.nanoTime();
     if (openSet.size() > 0) {
       int winner = 0; // Выбираем первый узел, как узел с минимальным путем или стоимостью
@@ -88,7 +86,6 @@ class Algorithm {
       }
       current = openSet.get(winner); // Переходим в лучший узел и теперь будем искать куда можно отсюда пойти
       if (current.f >= 3E36) { // Случай, когда все вершины в которые можно перейти недостижимы из-за недостатка топлива
-        //openSet.clear();
         logfile.println("Result: Out of fuel");
         log = true;
         noLoop();
@@ -102,7 +99,6 @@ class Algorithm {
         return;
       }
 
-      // Did I finish?
       if (current == target) { // В случае если дошли до цели
         log = true;
         logfile.println("Result: target found");
@@ -115,24 +111,20 @@ class Algorithm {
         logfile.println(gen_ms);
         logfile.println("Sum time:");
         logfile.println(gen_ms + calc_ms);
-        //generatePath();
         return;
       }
 
-      openSet.remove(current); // Убираем текущий узел из списка непросмотренных
-      closedSet.add(current); // Добавляем текущий узел в список просмотренных узлов
+      openSet.remove(current); 
+      closedSet.add(current); 
 
-      //check all the neighbors
       List<Hexagon> neighbors = current.neighbors; // Собираем список всех узлов соседей
       for (int i = 0; i < neighbors.size(); i++) {
         Hexagon neighbor = neighbors.get(i);
 
-        //Valid next spot?
-        if (!closedSet.contains(neighbor) && (neighbor.state >= 1) && (neighbor.checkMultiplexBarrier(1))) { // Убираем по сути из списка узлов соседей просмотренные и узлы препятствия
+        // Проверка возможности перейти в соседнюю клетку
+        if (!closedSet.contains(neighbor) && (neighbor.state >= 1) && (neighbor.checkMultiplexBarrier(1))) { 
           float tempG = current.g + heuristic(neighbor, current); // Получаем путь до текущей вершины + эвристика от соседа до нашей вершины
           
-          
-          //Is this a better path than before?
           boolean newPath = false;
           if (openSet.contains(neighbor)) {
             if (tempG < neighbor.g) { // Путь до соседа короче, чем тот что у него был (стало быть нашли путь лучше до этой точки)
@@ -142,12 +134,9 @@ class Algorithm {
             newPath = true;
             openSet.add(neighbor); // Добавляем соседа в список доступных вершин
           }
-          //Yes, it's a better path
+          // Нашли лучший путь до соседней клетки или увидели в первый раз эту клетку 
           if (newPath) {
-            //println("\r\nCell state: " + neighbor.state);
-            //println("Init fuel: " + neighbor.init_fuel_val);
             neighbor.fuel_val = current.fuel_val - ceil(heuristic(neighbor, current)) + neighbor.init_fuel_val;
-            //println("Result fuel: " + neighbor.fuel_val);
             if (neighbor.fuel_val > maxHexFuel) { // Ограничение сверху на максимальное топливу у робота (типо бак больше не может вместить)
               neighbor.fuel_val = maxHexFuel;
             }
@@ -156,18 +145,16 @@ class Algorithm {
               neighbor.fuel_val = neighbor.init_fuel_val;
               neighbor.g = 3E36;           
             } else {
-              neighbor.g = tempG; // Запомнили в переменную соседа этот путь
+              neighbor.g = tempG; // Запомнили стоимость пути до этого соседа
             }
-            //println("Result path length: " + neighbor.g);
             neighbor.heuristic = heuristic(neighbor, target); // Запоминаем на будущее значение эвристики от этого соседа до цели
             neighbor.f = neighbor.g + neighbor.heuristic; // Запоминаем общую стоимость пути
-            //println("Result estimated path length: " + neighbor.f);
             neighbor.previous = current; // Запоминаем, откуда попали в этот узел
           }
         }
       }
       calc_ms += System.nanoTime() - tmp;
-    } else { //no solution
+    } else { // Случай, когда цель недостижима
       logfile.println("Result: no solution");
       log = true;
       noLoop();
@@ -180,7 +167,6 @@ class Algorithm {
       logfile.println(gen_ms + calc_ms);
       return;
     }
-    //}
   }
 
   void displayPath() {

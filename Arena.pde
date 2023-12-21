@@ -1,4 +1,4 @@
-class Arena { //simple class to draw a mask that will define the arena shape based on an array of vertices //<>//
+class Arena { //simple class to draw a mask that will define the arena shape based on an array of vertices //<>// //<>//
   PVector[] corners;
   PGraphics mask;
 
@@ -13,8 +13,8 @@ class Arena { //simple class to draw a mask that will define the arena shape bas
     corners = corners_;
     mask.beginDraw();
     mask.clear();
-    mask.fill(255); //?
-    mask.stroke(150);//?
+    mask.fill(255); 
+    mask.stroke(150);
     mask.background(0);
     mask.pushMatrix();
     mask.translate(width/2, height/2);

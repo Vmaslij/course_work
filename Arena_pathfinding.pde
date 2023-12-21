@@ -2,7 +2,6 @@ import processing.video.*;
 import java.util.*;
 import org.ejml.*;
 import java.io.*;
-//import java.system.*;
 import boofcv.struct.calib.*;
 import boofcv.io.calibration.CalibrationIO;
 import boofcv.alg.geo.PerspectiveOps;
@@ -44,12 +43,10 @@ PrintWriter logfile;
 void setup() {
   frameRate(30);
   surface.setSize(1920, 1080);
-  //surface.setResizable(true);
   fullScreen(1);
   initArena();
   gridOutlines = createGraphics(width, height);
   gridFill = createGraphics(width, height);
-  //robot_body = createGraphics(width, height);
   hexGrid.drawOutlines(gridOutlines);
   pathFinder = new Algorithm(hexGrid);
   logfile = createWriter("logfile.txt");
@@ -77,7 +74,6 @@ void initArena() { // Create a mask to determine where hexes will be drawn
     float x = .5*height * cos(theta);
     float y = .5*height * sin(theta);
     pxCorners[j] = new PVector(x, y);
-    //println(pxCorners[j]);
     j++;
   }
   arenaMask = arena.init(pxCorners);
@@ -117,7 +113,6 @@ void draw() {
       }
     }
   }
-  //image(robot_body, 0, 0, width, height);
   delay(stepDelay);
 }
 
