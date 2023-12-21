@@ -182,8 +182,8 @@ class Algorithm {
     }
     //}
   }
+
   void displayPath() {
-    //println(path);
     noFill();
     stroke(255, 0, 200);
     strokeWeight(hexSize / 5);
@@ -192,14 +192,7 @@ class Algorithm {
       Hexagon h = path.get(i);
       ellipse(h.pixelX, h.pixelY, hexSize / 2, hexSize / 2);
       vertex(h.pixelX, h.pixelY);
-      /*if (log) {
-        robo.move(h.hexQ, h.hexR);
-        robo.drawHexOutline(robot_body, color(255, 0, 200), hexSize / 4);
-      }*/
-      //println(h.pixelxy);
     }
     endShape();
-    //robo.move(start.hexQ, start.hexR);
-    //robo.drawHexOutline(/*gridOutlines,*/ color(255, 0, 200), hexSize / 4);
   }
 }

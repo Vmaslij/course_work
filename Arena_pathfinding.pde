@@ -23,15 +23,17 @@ PGraphics robot_body;
 
 //Settings variables
 int impassableRate = 2; //set between 0 and 10. Higher numbers increase the rate of impassable hexes 
-int fuelRate = 1; //set between 0 and 10.
-int maxHexFuel = 15; // Max possible fuel on grid cell && robot could have
+int fuelRate = 5; //set between 0 and 10.
+int maxHexFuel = 25; // Max possible fuel on grid cell && robot could have
 int minHexFuel = 3; // Min possible fuel on grid cell
-int initFuel = 15; // Initial fuel robot has
-int hexSize = 25; //
+int initFuel = 25; // Initial fuel robot has
+int hexSize = 10; //
 int stepDelay = 10; //time delay for step, seems that it should be bigger
-float multiplex = 1.2; // Size multiplexor
+float multiplex = 1.5; // Size multiplexor
 
 int click_count; // Count number of times mouse clicked (set to 0 when target hex was chosen)
+int robot_state = 0;
+int reverse_index;
 boolean draw_path; // Draw and calc path from start to target if true
 PrintWriter logfile;
 
@@ -42,11 +44,12 @@ PrintWriter logfile;
 void setup() {
   frameRate(30);
   surface.setSize(1920, 1080);
+  //surface.setResizable(true);
   fullScreen(1);
   initArena();
   gridOutlines = createGraphics(width, height);
   gridFill = createGraphics(width, height);
-  robot_body = createGraphics(width, height);
+  //robot_body = createGraphics(width, height);
   hexGrid.drawOutlines(gridOutlines);
   pathFinder = new Algorithm(hexGrid);
   logfile = createWriter("logfile.txt");
@@ -90,10 +93,31 @@ void draw() {
   image(gridFill, 0, 0, width, height);
   image(gridOutlines, 0, 0, width, height);
   if ((draw_path == true) && (click_count == 0)) {
-    pathFinder.calculate();
-    pathFinder.generatePath();
+    if (!pathFinder.log) {
+      pathFinder.calculate();
+      pathFinder.generatePath();
+    }
     pathFinder.displayPath();
+    if (pathFinder.log) {
+      if (robot_state == 0) {
+        loop();
+        reverse_index = pathFinder.path.size() - 1;
+        stepDelay = stepDelay * 20;
+      }
+      println(robot_state);
+      if (robot_state < pathFinder.path.size()) {
+        Hexagon h = pathFinder.path.get(reverse_index);
+        pathFinder.robo.move(h.hexQ, h.hexR);
+        pathFinder.robo.drawHexOutline(/*robot_body*/color(255, 0, 200), hexSize / 4);
+        robot_state++;
+        reverse_index--;
+      } else {
+        noLoop();
+        stepDelay = stepDelay / 20;
+      }
+    }
   }
+  //image(robot_body, 0, 0, width, height);
   delay(stepDelay);
 }
 
@@ -123,6 +147,7 @@ void mouseClicked() {
     draw_path = true; 
     click_count = 0; 
     logfile.println("New path calculation start:\r\n");
+    robot_state = 0;
     
     pathFinder.reset();
     pathFinder.setTargets(startHex, targetHex); // set start and end targets

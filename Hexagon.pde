@@ -153,21 +153,22 @@ class Hexagon {
     buffer.popMatrix();
   }
 
-  void drawHexOutline(PGraphics buffer, color c, int strokeWeight_) {
-    buffer.pushMatrix();
-    buffer.translate(pixelX, pixelY);
-    buffer.noFill();
-    buffer.strokeWeight(strokeWeight_);
-    buffer.stroke(c);
-    buffer.beginShape();
+  void drawHexOutline(/*PGraphics buffer,*/ color c, int strokeWeight_) {
+    /*buffer.*/pushMatrix();
+    translate(pixelX, pixelY);
+    //noFill();
+    fill(c);
+    strokeWeight(strokeWeight_);
+    stroke(c);
+    beginShape();
     for (int i = 0; i <= 360; i +=60) {
       float theta = radians(i);
       float cornerX = size * cos(theta);
       float cornerY = size * sin(theta);
-      buffer.vertex(cornerX, cornerY);
+      vertex(cornerX, cornerY);
     }
-    buffer.endShape(CLOSE);
-    buffer.popMatrix();
+    endShape(CLOSE);
+    popMatrix();
   }
 
   void drawHexFill(PGraphics buffer, color c) {

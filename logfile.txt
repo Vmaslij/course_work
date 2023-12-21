@@ -1,36 +1,75 @@
 Barrier rate [0, 10]: 
 2
 Fuel rate [0, 10]: 
-1
+5
 Max fuel value in cell: 
-15
+25
 Min fuel value in cell: 
 3
 Initial robot fuel value: 
-15
+25
 New path calculation start:
 
 Result: target found
-path length: 14
+path length: 53
 Calculating path time:
-1355500
+9431900
 Generating path time:
-45900
+989100
 Sum time:
-1401400
-Fuel left 11 Path length from start 15.0
-Fuel left 12 Path length from start 14.0
-Fuel left 13 Path length from start 13.0
-Fuel left 14 Path length from start 12.0
-Fuel left 15 Path length from start 11.0
-Fuel left 5 Path length from start 10.0
-Fuel left 6 Path length from start 9.0
-Fuel left 7 Path length from start 8.0
-Fuel left 8 Path length from start 7.0
-Fuel left 9 Path length from start 6.0
-Fuel left 10 Path length from start 5.0
-Fuel left 11 Path length from start 4.0
-Fuel left 12 Path length from start 3.0
-Fuel left 13 Path length from start 2.0
-Fuel left 14 Path length from start 1.0
-Fuel left 15 Path length from start 0.0
+10421000
+Fuel left 24 Path length from start 54.0
+Fuel left 25 Path length from start 53.0
+Fuel left 24 Path length from start 52.0
+Fuel left 25 Path length from start 51.0
+Fuel left 23 Path length from start 50.0
+Fuel left 24 Path length from start 49.0
+Fuel left 25 Path length from start 48.0
+Fuel left 19 Path length from start 47.0
+Fuel left 20 Path length from start 46.0
+Fuel left 21 Path length from start 45.0
+Fuel left 22 Path length from start 44.0
+Fuel left 23 Path length from start 43.0
+Fuel left 24 Path length from start 42.0
+Fuel left 25 Path length from start 41.0
+Fuel left 25 Path length from start 40.0
+Fuel left 25 Path length from start 39.0
+Fuel left 25 Path length from start 38.0
+Fuel left 23 Path length from start 37.0
+Fuel left 24 Path length from start 36.0
+Fuel left 25 Path length from start 35.0
+Fuel left 23 Path length from start 34.0
+Fuel left 24 Path length from start 33.0
+Fuel left 25 Path length from start 32.0
+Fuel left 18 Path length from start 31.0
+Fuel left 19 Path length from start 30.0
+Fuel left 20 Path length from start 29.0
+Fuel left 12 Path length from start 28.0
+Fuel left 13 Path length from start 27.0
+Fuel left 14 Path length from start 26.0
+Fuel left 15 Path length from start 25.0
+Fuel left 16 Path length from start 24.0
+Fuel left 17 Path length from start 23.0
+Fuel left 18 Path length from start 22.0
+Fuel left 19 Path length from start 21.0
+Fuel left 20 Path length from start 20.0
+Fuel left 21 Path length from start 19.0
+Fuel left 22 Path length from start 18.0
+Fuel left 23 Path length from start 17.0
+Fuel left 24 Path length from start 16.0
+Fuel left 25 Path length from start 15.0
+Fuel left 19 Path length from start 14.0
+Fuel left 20 Path length from start 13.0
+Fuel left 21 Path length from start 12.0
+Fuel left 22 Path length from start 11.0
+Fuel left 23 Path length from start 10.0
+Fuel left 24 Path length from start 9.0
+Fuel left 25 Path length from start 8.0
+Fuel left 23 Path length from start 7.0
+Fuel left 24 Path length from start 6.0
+Fuel left 25 Path length from start 5.0
+Fuel left 25 Path length from start 4.0
+Fuel left 22 Path length from start 3.0
+Fuel left 23 Path length from start 2.0
+Fuel left 24 Path length from start 1.0
+Fuel left 25 Path length from start 0.0
