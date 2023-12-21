@@ -37,6 +37,20 @@ class Hexagon {
     id = new PVector(hexX, hexY, hexZ);
 
   }
+  
+  void move(int hexQ_, int hexR_) {
+    hexQ = hexQ_;
+    hexR = hexR_;
+    hexS = -hexQ - hexR;
+    int hexX = hexQ;
+    int hexZ = hexR;
+    int hexY = hexS;
+    size = hexSize * multiplex;
+    pixelxy = hexToPixel(hexQ, hexR);
+    pixelX = int(pixelxy.x);
+    pixelY = int(pixelxy.y);
+    id = new PVector(hexX, hexY, hexZ);
+  }
 
   PVector getKey() {
     return(id);
@@ -63,6 +77,64 @@ class Hexagon {
       }
     }
   }
+  
+  boolean checkMultiplexBarrier(int circle) {
+    boolean result = true;
+    
+    if (this.state >= 1) {
+      if (circle >= ceil(multiplex)) {
+        return result;
+      }
+      Hexagon[] neighbors_ = hexGrid.getNeighbors(this);
+        for (int i = 0; i < neighbors_.length; i++) {
+          Hexagon h = neighbors_[i];
+          if (h!= null && hexGrid.checkHex(h.id)) {
+            if (!h.checkMultiplexBarrier(circle + 1)) {
+              result = false; 
+              return result;
+            }
+          } else {
+            result = false; 
+            return result;
+          }
+        }
+    } else {
+     result = false; 
+    }
+    return result;
+  }
+  
+  /*boolean check_n(Hexagon[] neighbors_array, Hexagon neighbor) {
+    boolean found = false;
+    for (int j = 0; j < neighbors_array.length; j++) {
+      if (neighbors_array[j].getKey() == neighbor.getKey())
+        found = true;
+        break;
+    }
+    return found;
+  }
+  
+  void addNeighborsMultiplex() {
+    neighbors.clear();
+    int c = 0;
+    int k;
+    for (k = 1; k <= ceil(multiplex); k++) {
+      c += k;
+    }
+    k = 0;
+    Hexagon[] neighbors_ = new Hexagon[6 * c];
+    for (int j = 0; j < ceil(multiplex); j++) {
+      Hexagon[] _neighbors_ = hexGrid.getNeighbors(this);
+      for (int i = 0; i < _neighbors_.length; i++) {
+        Hexagon h = _neighbors_[i];
+        if (h != null && hexGrid.checkHex(h.id) && !check_n(neighbors_, h)) {
+          neighbors_[k] = h;
+          k++;
+          neighbors.add(h);
+        }
+      }
+    }
+  }*/
 
   void drawHexOutline(PGraphics buffer) {
     buffer.pushMatrix();

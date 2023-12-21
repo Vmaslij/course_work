@@ -4,7 +4,9 @@ class Algorithm {
   long gen_ms = 0;
   long tmp;
   int rfuel;
+  int robosize = ceil(multiplex);
   boolean log = false;
+  Hexagon robo;
   Hexagon start;
   Hexagon target;
   Hexagon current;
@@ -30,6 +32,7 @@ class Algorithm {
     start = start_;
     start.fuel_val = initFuel;
     start.init_fuel_val = initFuel;
+    robo = new Hexagon(hexGrid, start.hexQ, start.hexR);
     target = target_;
     openSet.clear();
     closedSet.clear();
@@ -125,7 +128,7 @@ class Algorithm {
         Hexagon neighbor = neighbors.get(i);
 
         //Valid next spot?
-        if (!closedSet.contains(neighbor) && (neighbor.state >= 1)) { // Убираем по сути из списка узлов соседей просмотренные и узлы препятствия
+        if (!closedSet.contains(neighbor) && (neighbor.state >= 1) && (neighbor.checkMultiplexBarrier(1))) { // Убираем по сути из списка узлов соседей просмотренные и узлы препятствия
           float tempG = current.g + heuristic(neighbor, current); // Получаем путь до текущей вершины + эвристика от соседа до нашей вершины
           
           
@@ -189,8 +192,14 @@ class Algorithm {
       Hexagon h = path.get(i);
       ellipse(h.pixelX, h.pixelY, hexSize / 2, hexSize / 2);
       vertex(h.pixelX, h.pixelY);
+      /*if (log) {
+        robo.move(h.hexQ, h.hexR);
+        robo.drawHexOutline(robot_body, color(255, 0, 200), hexSize / 4);
+      }*/
       //println(h.pixelxy);
     }
     endShape();
+    //robo.move(start.hexQ, start.hexR);
+    //robo.drawHexOutline(/*gridOutlines,*/ color(255, 0, 200), hexSize / 4);
   }
 }

@@ -19,15 +19,17 @@ Algorithm pathFinder;
 PGraphics gridOutlines;
 PGraphics gridFill;
 PGraphics arenaMask;
+PGraphics robot_body;
 
 //Settings variables
-int impassableRate = 10; //set between 0 and 10. Higher numbers increase the rate of impassable hexes 
+int impassableRate = 2; //set between 0 and 10. Higher numbers increase the rate of impassable hexes 
 int fuelRate = 1; //set between 0 and 10.
 int maxHexFuel = 15; // Max possible fuel on grid cell && robot could have
 int minHexFuel = 3; // Min possible fuel on grid cell
 int initFuel = 15; // Initial fuel robot has
 int hexSize = 25; //
 int stepDelay = 10; //time delay for step, seems that it should be bigger
+float multiplex = 1.2; // Size multiplexor
 
 int click_count; // Count number of times mouse clicked (set to 0 when target hex was chosen)
 boolean draw_path; // Draw and calc path from start to target if true
@@ -44,6 +46,7 @@ void setup() {
   initArena();
   gridOutlines = createGraphics(width, height);
   gridFill = createGraphics(width, height);
+  robot_body = createGraphics(width, height);
   hexGrid.drawOutlines(gridOutlines);
   pathFinder = new Algorithm(hexGrid);
   logfile = createWriter("logfile.txt");
@@ -102,6 +105,7 @@ void mouseClicked() {
   int x, y;
   x = mouseX;
   y = mouseY;
+  //println(hexGrid.pixelToHex(x, y).checkMultiplexBarrier(1));
   click_count++;
   if (click_count == 1) { // Set start hex on first click
     startHex = hexGrid.pixelToHex(x, y);
@@ -155,6 +159,6 @@ Hexagon pickHex() {
   do {
     Object randHexKey = keys[new Random().nextInt(keys.length)];
     h = hexGrid.getHex((PVector)randHexKey);
-  } while ( h == targetHex || h == startHex || (h.state == 0) || (h.state == 2));
+  } while ( h == targetHex || h == startHex || (h.state == 0) || (h.state == 2) || (!h.checkMultiplexBarrier(1)));
   return h;
 }

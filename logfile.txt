@@ -1,0 +1,36 @@
+Barrier rate [0, 10]: 
+2
+Fuel rate [0, 10]: 
+1
+Max fuel value in cell: 
+15
+Min fuel value in cell: 
+3
+Initial robot fuel value: 
+15
+New path calculation start:
+
+Result: target found
+path length: 14
+Calculating path time:
+1355500
+Generating path time:
+45900
+Sum time:
+1401400
+Fuel left 11 Path length from start 15.0
+Fuel left 12 Path length from start 14.0
+Fuel left 13 Path length from start 13.0
+Fuel left 14 Path length from start 12.0
+Fuel left 15 Path length from start 11.0
+Fuel left 5 Path length from start 10.0
+Fuel left 6 Path length from start 9.0
+Fuel left 7 Path length from start 8.0
+Fuel left 8 Path length from start 7.0
+Fuel left 9 Path length from start 6.0
+Fuel left 10 Path length from start 5.0
+Fuel left 11 Path length from start 4.0
+Fuel left 12 Path length from start 3.0
+Fuel left 13 Path length from start 2.0
+Fuel left 14 Path length from start 1.0
+Fuel left 15 Path length from start 0.0
