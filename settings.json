@@ -1,0 +1,12 @@
+[
+  {
+    "barrier_rate": 2,
+    "fuel_rate": 6,
+    "maxCellFuel": 8,
+    "minCellFuel": 4,
+    "start_fuel": 6,
+    "cell_size": 15,
+    "step_delay": 50,
+    "robot_size": 2
+  }
+]

@@ -21,21 +21,39 @@ PGraphics arenaMask;
 PGraphics robot_body;
 
 //Settings variables
-int impassableRate = 2; //set between 0 and 10. Higher numbers increase the rate of impassable hexes 
-int fuelRate = 5; //set between 0 and 10.
-int maxHexFuel = 25; // Max possible fuel on grid cell && robot could have
-int minHexFuel = 3; // Min possible fuel on grid cell
-int initFuel = 25; // Initial fuel robot has
-int hexSize = 10; //
+int impassableRate = 5; //set between 0 and 10. Higher numbers increase the rate of impassable hexes 
+int fuelRate = 2; //set between 0 and 10.
+int maxHexFuel = 4; // Max possible fuel on grid cell && robot could have
+int minHexFuel = 2; // Min possible fuel on grid cell
+int initFuel = 4; // Initial fuel robot has
+int hexSize = 25; //
 int stepDelay = 10; //time delay for step, seems that it should be bigger
-float multiplex = 1.5; // Size multiplexor
+float multiplex = 1; // Size multiplexor
 
 int click_count; // Count number of times mouse clicked (set to 0 when target hex was chosen)
 int robot_state = 0;
 int reverse_index;
 boolean draw_path; // Draw and calc path from start to target if true
 PrintWriter logfile;
+JSONArray values;
 
+void parseFile() {
+  values = loadJSONArray("settings.json");
+
+  //for (int i = 0; i < values.size(); i++) {
+    
+    JSONObject setting_vars = values.getJSONObject(0); 
+
+    impassableRate = setting_vars.getInt("barrier_rate");
+    fuelRate = setting_vars.getInt("fuel_rate");
+    maxHexFuel = setting_vars.getInt("maxCellFuel");
+    minHexFuel = setting_vars.getInt("minCellFuel");
+    initFuel = setting_vars.getInt("start_fuel");
+    hexSize = setting_vars.getInt("cell_size");
+    stepDelay = setting_vars.getInt("step_delay");
+    multiplex = setting_vars.getFloat("robot_size");
+  //}
+}
 
 /*
  * Initial setup for app
@@ -44,6 +62,7 @@ void setup() {
   frameRate(30);
   surface.setSize(1920, 1080);
   fullScreen(1);
+  parseFile();
   initArena();
   gridOutlines = createGraphics(width, height);
   gridFill = createGraphics(width, height);
@@ -102,7 +121,7 @@ void draw() {
         reverse_index = pathFinder.path.size() - 1;
         stepDelay = stepDelay * 20;
       }
-      println(robot_state);
+      //println(robot_state);
       if (robot_state < pathFinder.path.size()) {
         Hexagon h = pathFinder.path.get(reverse_index);
         pathFinder.robo.move(h.hexQ, h.hexR);
