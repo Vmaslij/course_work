@@ -53,12 +53,12 @@ class Algorithm {
     while (temp.previous != null) {
       path.add(temp.previous);
       if (log) {
-        logfile.println("Fuel left " + (temp.fuel_val) + " Path length from start " + (temp.g));
+        logfile.println("Остаток топлива " + (temp.fuel_val) + " Длина пути пройденная от старта " + (temp.g));
       }
       temp = temp.previous;
     }
     if (log) {
-        logfile.println("Fuel left " + (temp.fuel_val) + " Path length from start " + (temp.g));
+        logfile.println("Остаток топлива " + (temp.fuel_val) + " Длина пути пройденная от старта " + (temp.g));
       }
     gen_ms += System.nanoTime() - tmp;
   }
@@ -86,30 +86,30 @@ class Algorithm {
       }
       current = openSet.get(winner); // Переходим в лучший узел и теперь будем искать куда можно отсюда пойти
       if (current.f >= 3E36) { // Случай, когда все вершины в которые можно перейти недостижимы из-за недостатка топлива
-        logfile.println("Result: Out of fuel");
+        logfile.println("Результат: Точка недостижима из-за недостатка топлива");
         log = true;
         noLoop();
         calc_ms += System.nanoTime() - tmp;
-        logfile.println("Calculating path time:");
+        logfile.println("Время поиска пути (наносекунды):");
         logfile.println(calc_ms);
-        logfile.println("Generating path time:");
+        logfile.println("Время восстановления пути (наносекунды):");
         logfile.println(gen_ms);
-        logfile.println("Sum time:");
+        logfile.println("Суммарное время (наносекунды):");
         logfile.println(gen_ms + calc_ms);
         return;
       }
 
       if (current == target) { // В случае если дошли до цели
         log = true;
-        logfile.println("Result: target found");
-        logfile.println("path length: " + (path.size()-1));
+        logfile.println("Результат: Найден кратчайший маршрут до точки");
+        logfile.println("Длина пути: " + (path.size()));
         calc_ms += System.nanoTime() - tmp;
         noLoop();
-        logfile.println("Calculating path time:");
+        logfile.println("Время поиска пути (наносекунды):");
         logfile.println(calc_ms);
-        logfile.println("Generating path time:");
+        logfile.println("Время восстановления пути (наносекунды):");
         logfile.println(gen_ms);
-        logfile.println("Sum time:");
+        logfile.println("Суммарное время (наносекунды):");
         logfile.println(gen_ms + calc_ms);
         return;
       }
@@ -155,16 +155,16 @@ class Algorithm {
       }
       calc_ms += System.nanoTime() - tmp;
     } else { // Случай, когда цель недостижима
-      logfile.println("Result: no solution");
+      logfile.println("Результат: Цель недостижима из-за препятствий");
       log = true;
       noLoop();
       calc_ms += System.nanoTime() - tmp;
-      logfile.println("Calculating path time:");
-      logfile.println(calc_ms);
-      logfile.println("Generating path time:");
-      logfile.println(gen_ms);
-      logfile.println("Sum time:");
-      logfile.println(gen_ms + calc_ms);
+      logfile.println("Время поиска пути (наносекунды):");
+        logfile.println(calc_ms);
+        logfile.println("Время восстановления пути (наносекунды):");
+        logfile.println(gen_ms);
+        logfile.println("Суммарное время (наносекунды):");
+        logfile.println(gen_ms + calc_ms);
       return;
     }
   }

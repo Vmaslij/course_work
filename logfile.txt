@@ -1,103 +1,78 @@
-Barrier rate [0, 10]: 
+Частота генерации препятствий [0, 10]: 
 2
-Fuel rate [0, 10]: 
+Частота генерации топливных точек [0, 10]: 
 5
-Max fuel value in cell: 
+Максимальное количества топлива на точке и максимальное количество топлива у робота: 
 25
-Min fuel value in cell: 
+Минимальное количества топлива на точке: 
 3
-Initial robot fuel value: 
+Начальное значение топлива у робота: 
 25
-New path calculation start:
+Размер робота: 
+2
 
-Result: target found
-path length: 81
-Calculating path time:
-9871700
-Generating path time:
-1921000
-Sum time:
-11792700
-Fuel left 19 Path length from start 82.0
-Fuel left 20 Path length from start 81.0
-Fuel left 21 Path length from start 80.0
-Fuel left 22 Path length from start 79.0
-Fuel left 23 Path length from start 78.0
-Fuel left 24 Path length from start 77.0
-Fuel left 25 Path length from start 76.0
-Fuel left 23 Path length from start 75.0
-Fuel left 24 Path length from start 74.0
-Fuel left 25 Path length from start 73.0
-Fuel left 24 Path length from start 72.0
-Fuel left 25 Path length from start 71.0
-Fuel left 20 Path length from start 70.0
-Fuel left 21 Path length from start 69.0
-Fuel left 22 Path length from start 68.0
-Fuel left 23 Path length from start 67.0
-Fuel left 24 Path length from start 66.0
-Fuel left 25 Path length from start 65.0
-Fuel left 23 Path length from start 64.0
-Fuel left 24 Path length from start 63.0
-Fuel left 25 Path length from start 62.0
-Fuel left 24 Path length from start 61.0
-Fuel left 20 Path length from start 60.0
-Fuel left 21 Path length from start 59.0
-Fuel left 22 Path length from start 58.0
-Fuel left 23 Path length from start 57.0
-Fuel left 24 Path length from start 56.0
-Fuel left 25 Path length from start 55.0
-Fuel left 25 Path length from start 54.0
-Fuel left 20 Path length from start 53.0
-Fuel left 21 Path length from start 52.0
-Fuel left 22 Path length from start 51.0
-Fuel left 23 Path length from start 50.0
-Fuel left 24 Path length from start 49.0
-Fuel left 25 Path length from start 48.0
-Fuel left 23 Path length from start 47.0
-Fuel left 24 Path length from start 46.0
-Fuel left 25 Path length from start 45.0
-Fuel left 25 Path length from start 44.0
-Fuel left 25 Path length from start 43.0
-Fuel left 23 Path length from start 42.0
-Fuel left 24 Path length from start 41.0
-Fuel left 25 Path length from start 40.0
-Fuel left 23 Path length from start 39.0
-Fuel left 24 Path length from start 38.0
-Fuel left 25 Path length from start 37.0
-Fuel left 19 Path length from start 36.0
-Fuel left 20 Path length from start 35.0
-Fuel left 21 Path length from start 34.0
-Fuel left 22 Path length from start 33.0
-Fuel left 23 Path length from start 32.0
-Fuel left 24 Path length from start 31.0
-Fuel left 25 Path length from start 30.0
-Fuel left 24 Path length from start 29.0
-Fuel left 25 Path length from start 28.0
-Fuel left 23 Path length from start 27.0
-Fuel left 24 Path length from start 26.0
-Fuel left 25 Path length from start 25.0
-Fuel left 17 Path length from start 24.0
-Fuel left 18 Path length from start 23.0
-Fuel left 19 Path length from start 22.0
-Fuel left 20 Path length from start 21.0
-Fuel left 21 Path length from start 20.0
-Fuel left 22 Path length from start 19.0
-Fuel left 23 Path length from start 18.0
-Fuel left 24 Path length from start 17.0
-Fuel left 25 Path length from start 16.0
-Fuel left 25 Path length from start 15.0
-Fuel left 22 Path length from start 14.0
-Fuel left 23 Path length from start 13.0
-Fuel left 24 Path length from start 12.0
-Fuel left 25 Path length from start 11.0
-Fuel left 21 Path length from start 10.0
-Fuel left 22 Path length from start 9.0
-Fuel left 23 Path length from start 8.0
-Fuel left 24 Path length from start 7.0
-Fuel left 25 Path length from start 6.0
-Fuel left 24 Path length from start 5.0
-Fuel left 25 Path length from start 4.0
-Fuel left 25 Path length from start 3.0
-Fuel left 25 Path length from start 2.0
-Fuel left 24 Path length from start 1.0
-Fuel left 25 Path length from start 0.0
+Новый маршрут:
+Результат: Найден кратчайший маршрут до точки
+Длина пути: 55
+Время поиска пути (наносекунды):
+6531900
+Время восстановления пути (наносекунды):
+822900
+Суммарное время (наносекунды):
+7354800
+Остаток топлива 19 Длина пути пройденная от старта 55.0
+Остаток топлива 20 Длина пути пройденная от старта 54.0
+Остаток топлива 21 Длина пути пройденная от старта 53.0
+Остаток топлива 22 Длина пути пройденная от старта 52.0
+Остаток топлива 19 Длина пути пройденная от старта 51.0
+Остаток топлива 20 Длина пути пройденная от старта 50.0
+Остаток топлива 21 Длина пути пройденная от старта 49.0
+Остаток топлива 22 Длина пути пройденная от старта 48.0
+Остаток топлива 23 Длина пути пройденная от старта 47.0
+Остаток топлива 24 Длина пути пройденная от старта 46.0
+Остаток топлива 25 Длина пути пройденная от старта 45.0
+Остаток топлива 24 Длина пути пройденная от старта 44.0
+Остаток топлива 25 Длина пути пройденная от старта 43.0
+Остаток топлива 22 Длина пути пройденная от старта 42.0
+Остаток топлива 15 Длина пути пройденная от старта 41.0
+Остаток топлива 16 Длина пути пройденная от старта 40.0
+Остаток топлива 17 Длина пути пройденная от старта 39.0
+Остаток топлива 18 Длина пути пройденная от старта 38.0
+Остаток топлива 19 Длина пути пройденная от старта 37.0
+Остаток топлива 20 Длина пути пройденная от старта 36.0
+Остаток топлива 21 Длина пути пройденная от старта 35.0
+Остаток топлива 22 Длина пути пройденная от старта 34.0
+Остаток топлива 23 Длина пути пройденная от старта 33.0
+Остаток топлива 24 Длина пути пройденная от старта 32.0
+Остаток топлива 25 Длина пути пройденная от старта 31.0
+Остаток топлива 20 Длина пути пройденная от старта 30.0
+Остаток топлива 21 Длина пути пройденная от старта 29.0
+Остаток топлива 22 Длина пути пройденная от старта 28.0
+Остаток топлива 23 Длина пути пройденная от старта 27.0
+Остаток топлива 24 Длина пути пройденная от старта 26.0
+Остаток топлива 25 Длина пути пройденная от старта 25.0
+Остаток топлива 25 Длина пути пройденная от старта 24.0
+Остаток топлива 22 Длина пути пройденная от старта 23.0
+Остаток топлива 23 Длина пути пройденная от старта 22.0
+Остаток топлива 24 Длина пути пройденная от старта 21.0
+Остаток топлива 25 Длина пути пройденная от старта 20.0
+Остаток топлива 20 Длина пути пройденная от старта 19.0
+Остаток топлива 21 Длина пути пройденная от старта 18.0
+Остаток топлива 22 Длина пути пройденная от старта 17.0
+Остаток топлива 23 Длина пути пройденная от старта 16.0
+Остаток топлива 24 Длина пути пройденная от старта 15.0
+Остаток топлива 25 Длина пути пройденная от старта 14.0
+Остаток топлива 19 Длина пути пройденная от старта 13.0
+Остаток топлива 20 Длина пути пройденная от старта 12.0
+Остаток топлива 21 Длина пути пройденная от старта 11.0
+Остаток топлива 22 Длина пути пройденная от старта 10.0
+Остаток топлива 23 Длина пути пройденная от старта 9.0
+Остаток топлива 24 Длина пути пройденная от старта 8.0
+Остаток топлива 25 Длина пути пройденная от старта 7.0
+Остаток топлива 24 Длина пути пройденная от старта 6.0
+Остаток топлива 25 Длина пути пройденная от старта 5.0
+Остаток топлива 21 Длина пути пройденная от старта 4.0
+Остаток топлива 22 Длина пути пройденная от старта 3.0
+Остаток топлива 23 Длина пути пройденная от старта 2.0
+Остаток топлива 24 Длина пути пройденная от старта 1.0
+Остаток топлива 25 Длина пути пройденная от старта 0.0

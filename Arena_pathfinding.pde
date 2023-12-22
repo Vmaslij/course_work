@@ -50,16 +50,18 @@ void setup() {
   hexGrid.drawOutlines(gridOutlines);
   pathFinder = new Algorithm(hexGrid);
   logfile = createWriter("logfile.txt");
-  logfile.println("Barrier rate [0, 10]: ");
+  logfile.println("Частота генерации препятствий [0, 10]: ");
   logfile.println(impassableRate);
-  logfile.println("Fuel rate [0, 10]: ");
+  logfile.println("Частота генерации топливных точек [0, 10]: ");
   logfile.println(fuelRate);
-  logfile.println("Max fuel value in cell: ");
+  logfile.println("Максимальное количества топлива на точке и максимальное количество топлива у робота: ");
   logfile.println(maxHexFuel);
-  logfile.println("Min fuel value in cell: ");
+  logfile.println("Минимальное количества топлива на точке: ");
   logfile.println(minHexFuel);
-  logfile.println("Initial robot fuel value: ");
+  logfile.println("Начальное значение топлива у робота: ");
   logfile.println(initFuel);
+  logfile.println("Размер робота: ");
+  logfile.println(ceil(multiplex));
   click_count = 0;
   draw_path = false;
   hexGrid.seedMap(impassableRate, fuelRate);
@@ -104,7 +106,7 @@ void draw() {
       if (robot_state < pathFinder.path.size()) {
         Hexagon h = pathFinder.path.get(reverse_index);
         pathFinder.robo.move(h.hexQ, h.hexR);
-        pathFinder.robo.drawHexOutline(/*robot_body*/color(255, 0, 200), hexSize / 4);
+        pathFinder.robo.drawHexOutline(color(255, 0, 200), hexSize / 4);
         robot_state++;
         reverse_index--;
       } else {
@@ -141,7 +143,7 @@ void mouseClicked() {
     
     draw_path = true; 
     click_count = 0; 
-    logfile.println("New path calculation start:\r\n");
+    logfile.println("\r\nНовый маршрут:");
     robot_state = 0;
     
     pathFinder.reset();

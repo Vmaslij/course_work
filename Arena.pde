@@ -1,4 +1,4 @@
-class Arena { //simple class to draw a mask that will define the arena shape based on an array of vertices //<>// //<>//
+class Arena { //simple class to draw a mask that will define the arena shape based on an array of vertices //<>//
   PVector[] corners;
   PGraphics mask;
 
